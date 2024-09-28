@@ -1,40 +1,24 @@
-import React from 'react'
-import Navbar from './Components/Navbar/Navbar'
-import Hero from './Components/Hero/Hero'
-import Title from './Components/Title/Title'
-import Programs from './Components/Programs/Programs'
-import About from './Components/About/About'
-import Campus from './Components/Campus/Campus'
-import Testimonials from './Components/Testimonials/Testimonials'
-import Contact from './Components/Contact/Contact'
-import Footer from './Components/Footer/Footer'
-import VideoPlayer from './Components/VideoPlayer/VideoPlayer'
-import { useState } from 'react'
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Gallery from './Components/Gallery/Gallery';
+import HomePage from './Components/Homepage/Homepage'; // Nuova Home con Navbar
+import { useState } from 'react';
 
 const App = () => {
-
   const [playState, setPlayState] = useState(false);
 
-
   return (
-    <div>
-      <Navbar />
-      <Hero />
-      <div className="container">
-        <Title subTitle='Our Program' title='What we offer' />
-        <Programs />
-        <About setPlayState={setPlayState} />
-        <Title subTitle='Gallery' title='Campus Photos' />
-        <Campus />
-        <Title subTitle='Testimonials' title='What student says' />
-        <Testimonials />
-        <Title subTitle='Contact Us' title='Get In Touch' />
-        <Contact />
-        <Footer />
-      </div>
-      <VideoPlayer playState={playState} setPlayState={setPlayState} />
-    </div>
-  )
+    <Routes>
+      <Route path="/" element={<HomePage setPlayState={setPlayState} />} />
+      <Route path="/gallery" element={<Gallery />} /> 
+    </Routes>
+  );
 }
 
-export default App
+const AppWrapper = () => (
+  <Router>
+    <App />
+  </Router>
+);
+
+export default AppWrapper;
